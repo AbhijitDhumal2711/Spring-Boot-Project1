@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Details</title>
+</head>
+<body>
+
+<h1>Traveller Details</h1>
+<div th:each="data : ${details}">
+    <h4>Traveller ID: <span th:text="${data.TId}"></span></h4>
+    <h4>Traveller Name: <span th:text="${data.fullName}"></span></h4>
+    <h4>Traveller address: <span th:text="${data.address}"></span></h4>
+    <h4>Traveller email: <span th:text="${data.email}"></span></h4>
+    <h4>Traveller password: <span th:text="${data.password}"></span></h4>
+
+    <h1>Passport </h1>
+    <h4>Passport ID: <span th:text="${data.passport.pId}"></span></h4>
+    <h4>Passport Number: <span th:text="${data.passport.passportNumber}"></span></h4>
+    <h4>Passport IssueDate: <span th:text="${data.passport.issueDate}"></span></h4>
+    <h4>Passport Expire Date: <span th:text="${data.passport.expireDate}"></span></h4>
+
+
+  
+    <div th:each="staff : ${data.countries}">
+    <h1>Country</h1>
+        <p>Country ID: <span th:text="${staff.countryId}"></span></p>
+        <p>Country Name: <span th:text="${staff.countryName}"></span></p>
+
+        
+        <div th:each="secure : ${staff.cities}">
+        <h1>City</h1>
+        
+            <p>city ID: <span th:text="${secure.cityId}"></span></p>
+            <p>city Name: <span th:text="${secure.cityName}"></span></p>
+
+            
+            <div th:each="country : ${secure.places}">
+        <h1>Place</h1>
+
+                <p>Place ID: <span th:text="${country.placeId}"></span></p>
+                <p>Place Name: <span th:text="${country.placeName}"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

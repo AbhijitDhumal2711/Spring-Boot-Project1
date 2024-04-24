@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet" 
+ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+ crossorigin="anonymous"> 
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa;
+        }
+        .login-form {
+            width: 350px;
+            margin: 150px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        .login-form h2 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        
+        .centered h2 {
+        
+         text-align:center;
+}
+        
+        
+    </style>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  
+  
+  <div class="centered">
+   <h2> <a class="navbar-brand" href="#">User Login Form</a></h2>
+</div>
+  
+  </nav>
+
+
+
+<div class="login-form">
+    <h2>User Login</h2>
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label for="username">Email:</label>
+            <input type="text" id="username" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+   
+  
+   <h1><a class="btn btn-primary " th:href="@{/reg}">Register</a></h1>
+    
+   
+    </form>
+</div>
+
+<!-- Bootstrap JS (Optional, only needed if you use Bootstrap JavaScript components) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+</body>
+</html>

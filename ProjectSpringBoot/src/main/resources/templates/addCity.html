@@ -1,0 +1,131 @@
+<div class="container">
+    <h2>Patient Details</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Weight</th>
+                <th>Contact</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr th:each="traveller : ${traveller}">
+                <td th:text="${traveller.TId}"></td>
+                <td th:text="${traveller.fullName}"></td>
+                <td th:text="${traveller.address}"></td>
+                <td th:text="${traveller.email}"></td>
+                <td th:text="${traveller.password}"></td>
+                <td>
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#updateModal'+${traveller.TId}">Update</button>
+        </div>
+        <div class="modal fade" th:id="'updateModal'+${traveller.TId}" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Patient Details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <h2>Update Patient Details</h2>
+                            <form action="updatepatient" method="post">
+                                <div class="mb-3">
+                                    <label for="id" class="form-label">ID</label>
+                                    <input type="text" class="form-control" id="id" name="id" th:value="${traveller.TId}" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" th:value="${traveller.TId}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="age" name="age" th:value="${traveller.TId}" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="weight" class="form-label">Weight</label>
+                                    <input type="number" class="form-control" id="weight" name="weight" th:value="${traveller.TId}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contact" class="form-label">Contact</label>
+                                    <input type="tel" class="form-control" id="contact" name="contact" th:value="${traveller.TId}" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Delete Button trigger modal -->
+<div class="col">
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#deleteModal'+${traveller.TId}">
+        Delete
+    </button>
+</div>
+<!-- DELETE Modal -->
+<div class="modal fade" th:id="'deleteModal'+${traveller.TId}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Patient</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="deletepatient" method="post">
+                    <input type="hidden" name="id" th:value="${traveller.TId}">
+                    <button type="submit" class="btn btn-danger">Yes!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Show/Hide Appointment Button -->
+<div class="col">
+    <form action="searchappointment" method="post">
+        <input type="hidden" name="id" th:value="${traveller.TId}">
+        <button type="submit" class="btn btn-primary" th:if="${appointmentService.getAppointment(traveller.TId) != null}">
+            Show Appointment
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addappointment"
+                th:unless="${appointmentService.getAppointment(traveller.TId) != null}">
+            Add Appointment
+        </button>
+    </form>
+</div>
+<!-- Add Appointment Modal -->
+<div class="modal fade" id="addappointment" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1" aria-labelledby="addAppointmentLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addAppointmentLabel">Appointment Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="addappointment" method="post">
+                    <input type="hidden" id="patientId" name="pid" th:value="$${traveller.TId}">
+
+                    <div class="mb-3">
+                        <label for="appointmentName" class="form-label">Appointment Name</label>
+                        <input type="text" class="form-control" id="appointmentName" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="appointmentDate" class="form-label">Appointment Date</label>
+                        <input type="date" class="form-control" id="appointmentDate" name="date" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Appointment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+                
